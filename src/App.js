@@ -1,19 +1,19 @@
 import React from 'react';
-import { DatePicker } from 'antd';
-import './App.scss';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import routes from './config/routes';
+
 
 function App() {
-  const test = (date, dateString) => {
-    console.log(date, dateString)
-  }
   return (
-    <div className="App">
-    <h1>Web personal de Joel</h1>
-  
-    <DatePicker onChange={test}/>
-  
-    </div>
+    <Router>
+      <Switch>
+        
+      </Switch>
+    </Router>
   );
+ 
 }
+
+
 
 export default App;
