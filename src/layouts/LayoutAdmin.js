@@ -1,12 +1,40 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
 import {Layout} from "antd";
 
-export default function LayoutAdmin(){
+import "./LayoutAdmin.scss";
+
+export default function LayoutAdmin(props){
+    const { routes } = props;
+    const {Header, Content, Footer } = Layout;
     return(
         <Layout>
-            <h2>Menu Sider</h2>
-            <div>Contenido....</div>
-            <h5>Footer...</h5>
+            <h2>Menu Sider Admin</h2>
+            <Layout>
+              <Header>Header...</Header>
+              <Content>
+                 <LoadRoutes routes={routes} />
+              </Content>
+              <Footer>
+                  Joel Salazar 2020
+              </Footer>
+            </Layout>
         </Layout>
     )
+}
+
+function LoadRoutes({ routes }){
+
+    return(
+      <Switch>
+          {routes.map((route, index) => (
+        <Route 
+            key ={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+        />
+    ))}
+      </Switch>
+    );
 }
