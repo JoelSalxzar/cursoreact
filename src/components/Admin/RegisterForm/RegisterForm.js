@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RegisterForm.scss';
 import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
 import { emailValidation, minLengthValidation } from "../../../utils/formValidation";
-
+import { signUpApi } from '../../../api/user';
 
 export default function RegisterForm(){
     const [inputs, setInputs] = useState({
@@ -48,7 +48,7 @@ export default function RegisterForm(){
       };
     
 
-    const register = e =>{
+    const register = async e =>{
          e.preventDefault();
          const {email, password, repeatPassword, privacyPolicy} = formValid;
 
@@ -67,12 +67,44 @@ export default function RegisterForm(){
                 message: "Las contraseñas tienen que ser iguales."
               });
            }else{
-            notification["success"]({
-              message: "Las contraseñas tienen que ser iguales"
-            });
+            const result = await signUpApi(inputs);
+            if(!result.ok){
+              notification["error"]({
+                message: result.message
+              });
+            }else{
+              notification["success"]({
+                message: result.message
+              });
+              resetForm();
+            }
            }
          }
     };
+
+
+    const resetForm = () =>{
+      const input = document.getElementsByTagName('input');
+
+      for(let i = 0; i < inputs.length; i++){
+        inputs[i].classList.remove("success");
+        inputs[i].classList.remove("error");
+      }
+
+      setInputs({
+        email:"",
+        password:"",
+        repeatPassword:"",
+        privacyPolicy: false
+      });
+
+      setFormValid({
+        email: false,
+        password: false,
+        repeatPassword: false,
+        privacyPolicy: false
+      });
+   };
 
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>

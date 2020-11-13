@@ -4,6 +4,8 @@ import './SignIn.scss';
 import Logo from '../../../assets/img/png/logo-white.png';
 import {Redirect} from 'react-router-dom';
 import RegisterForm from '../../../components/Admin/RegisterForm';
+import LoginForm from '../../../components/Admin/LoginForm';
+
 
 export default function SignIn(){
     const { Content } = Layout;
@@ -18,7 +20,7 @@ export default function SignIn(){
                <div className="sign-in__content-tabs">
                  <Tabs type="card">
                   <TabPane tab={<span>Entrar</span>} key ="1">
-                      Componente LoginForm
+                    <LoginForm />
                   </TabPane>
                   <TabPane tab={<span>Nuevo Usuario</span>} key="2">
                       <RegisterForm/>
