@@ -5,14 +5,19 @@ import MenuTop from '../components/Admin/MenuTop';
 import MenuSider from '../components/Admin/MenuSider';
 import "./LayoutAdmin.scss";
 import AdminSignIn from '../pages/Admin/SignIn/SignIn';
+import {getRefreshTokenApi, getAccessToken} from '../api/auth';
 
 
 export default function LayoutAdmin(props){
     const { routes } = props;
     const [menuCollapsed, setMenuCollapsed] = useState(false);
     const {Header, Content, Footer } = Layout;
+    
 
     const user = null;
+
+    const refreshToken = getRefreshTokenApi();
+    console.log(refreshToken);
 
     if(!user){
         return(
