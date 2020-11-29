@@ -34,10 +34,8 @@ export default function LoginForm() {
       notification["success"]({
         message: "Login correcto."
       });
-
       window.location.href = "/admin";
     }
-
     console.log(result);
   };
 
